@@ -1,0 +1,139 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+header {
+    width: 100%;
+}
+
+/*.navbar {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: center;*/
+/*    background-color: #333;*/
+/*    padding: 1rem;*/
+/*}*/
+
+/*.logo {*/
+/*    color: #fff;*/
+/*    text-decoration: none;*/
+/*    font-size: 1.5rem;*/
+/*}*/
+
+/*.nav-links {*/
+/*    display: flex;*/
+/*    list-style-type: none;*/
+/*}*/
+
+/*.nav-links li {*/
+/*    margin-left: 1rem;*/
+/*}*/
+
+/*.nav-links a {*/
+/*    text-decoration: none;*/
+/*    color: #fff;*/
+/*    transition: color 0.3s ease;*/
+/*}*/
+
+/*.nav-links a:hover {*/
+/*    color: #ccc;*/
+/*}*/
+
+.banner {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.banner-image {
+    width: 100%;
+    height: 400px;
+}
+
+.banner-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+}
+
+.banner-text h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.banner-text p {
+    font-size: 1.25rem;
+}
+/*!* Add your existing styles here *!*/
+
+/*.container {*/
+/*    max-width: 960px;*/
+/*    margin: 0 auto;*/
+/*}*/
+
+/*.filter-section {*/
+/*    width: 100%;*/
+/*    padding: 2rem 1rem;*/
+/*    background-color: #f8f8f8;*/
+/*    font-size: 1.25rem; !* Increase the font size *!*/
+/*}*/
+
+/*.filter-form {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.form-group {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin-right: 1rem;*/
+/*}*/
+
+/*.form-group label {*/
+/*    margin-bottom: 0.5rem;*/
+/*}*/
+
+/*.filter-button {*/
+/*    background-color: #333;*/
+/*    color: #fff;*/
+/*    border: none;*/
+/*    padding: 0.5rem 1rem;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.filter-button:hover {*/
+/*    background-color: #555;*/
+/*}*/
+
+/*!* Responsive styles *!*/
+/*@media (max-width: 768px) {*/
+/*    .filter-form {*/
+/*        flex-direction: column;*/
+/*    }*/
+
+/*    .form-group {*/
+/*        margin-right: 0;*/
+/*        margin-bottom: 1rem;*/
+/*    }*/
+/*}*/
+/*.banner {*/
+/*    position: relative;*/
+/*    width: 100%;*/
+/*    height: 400px;*/
+/*    overflow: hidden;*/
+/*}*/
+
+

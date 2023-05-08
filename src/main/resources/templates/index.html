@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <title>Car Store</title>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">MyBrand</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Car</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/carparts">Car Part</a>
+                    </li>
+                    <li th:if="${session.customer != null}" class="nav-item">
+                        <a class="nav-link" href="/cart">Cart</a>
+                    </li>
+                    <li th:if="${session.customer == null}" class="nav-item">
+                        <a class="nav-link" href="/newcustomer">Creat Account</a>
+                    </li>
+
+                </ul>
+                <h5 th:if="${session.customer != null}" th:text="${session.customer.getFirstName()+' '+session.customer.getLastName()}" style="color: red; margin-left: 40px; margin-top: 5px"  ></h5>
+
+                <ul class="navbar-nav ml-auto">
+
+
+                    <li th:if="${session.customer == null}" class="nav-item">
+                        <h5 style="color: white" class="nav-link btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</h5>
+                    </li>
+                    <li th:if="${session.customer != null}" class="nav-item">
+                        <a  href="/logout" style="color: white" class="nav-link btn btn-dark" >Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="banner">
+        <img src="/static/banner.jpg" alt="Banner Image" class="banner-image img-fluid">
+        <div class="banner-text">
+            <h1>Welcome to My Website</h1>
+            <p>Discover amazing features and services</p>
+        </div>
+    </div>
+</header>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h5 class="modal-title" id="loginModalLabel">Login Form</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <form action="/login" method="POST">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Main Content -->
+<!--<main class="container">-->
+<!--    <div class="row">-->
+<!--        <div class="col-md-4 filters">-->
+<!--            <h4>Filter By:</h4>-->
+<!--            <form>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="make">Make:</label>-->
+<!--                    <select class="form-control" id="make">-->
+<!--                        <option value="">Select Make</option>-->
+<!--                        <option value="Toyota">Toyota</option>-->
+<!--                        <option value="Honda">Honda</option>-->
+<!--                        <option value="Ford">Ford</option>-->
+<!--                        <option value="Chevrolet">Chevrolet</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="model">Model:</label>-->
+<!--                    <select class="form-control" id="model">-->
+<!--                        <option value="">Select Model</option>-->
+<!--                        <option value="Corolla">Corolla</option>-->
+<!--                        <option value="Civic">Civic</option>-->
+<!--                        <option value="Fiesta">Fiesta</option>-->
+<!--                        <option value="Cruze">Cruze</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--                <div class="form-group">-->
+<!--                    <label for="price">Price Range:</label>-->
+<!--                    <select class="form-control" id="price">-->
+<!--                        <option value="">Select Price Range</option>-->
+<!--                        <option value="1">$1,000 - $10,000</option>-->
+<!--                        <option value="2">$10,000 - $20,000</option>-->
+<!--                        <option value="3">$20</option>-->
+<!--                    </select>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div >-->
+<!--        <div class="col-md-8 products">-->
+
+<!--        </div>-->
+
+<!--            </div >-->
+<!--                </main >-->
+
+<!-- Main Content -->
+<main class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 filters">
+            <h4>Find Car By Make:</h4>
+            <form action="/find/bymake" method="post">
+                <div class="form-group">
+                    <label for="model">Make:</label>
+                    <input class="form-control" type="text" name="make" >
+                </div>
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-dark btn-block">Search</button>
+                    </div>
+                </div>
+
+            </form>
+            <h4>Filter By Price Range:</h4>
+            <form action="/find/price" method="post">
+                <div class="form-group">
+                    <label for="model">From:</label>
+                   <input class="form-control" type="number" name="from" >
+                </div>
+                <div class="form-group">
+                    <label for="model">To:</label>
+                    <input class="form-control" type="number" name="to" >
+                </div>
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-dark btn-block">Search</button>
+                    </div>
+                </div>
+
+            </form>
+            <form action="/" method="get">
+
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success btn-block">View All</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="col-md-8 products">
+            <div class="row">
+                <div th:each="car : ${session.cars}" class="col-md-4 mt-2">
+                    <div class="card">
+                        <img class="card-img-top" th:if="${car.getImageUrl() != null}" th:src="${car.getImageUrl()}" alt="Car Image" />
+                        <img class="card-img-top" th:if="${car.getImageUrl() == null}" th:src="@{/static/banner.jpg}" alt="Default Car Image" />
+<!--                        <img class="card-img-top" th:src="@{/static/banner.jpg}" alt="Car 1">-->
+                        <div class="card-body">
+                            <h5 class="card-title" th:text="'R'+${car.getPrice()}"></h5>
+                            <p class="card-text" th:text="${car.getYear()} + ' ' + ${car.getMake()} + ' ' + ${car.getModel()}"> </p>
+                            <a th:href="@{/product/car/{id}(id=${car.getId()})}" class="btn btn-primary">View More</a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
