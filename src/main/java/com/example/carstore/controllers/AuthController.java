@@ -50,7 +50,7 @@ public class AuthController {
             session.setAttribute("customer",customer);
             return "redirect:/";
         }else {
-            return "index";
+            return "loginpage";
         }
 
 

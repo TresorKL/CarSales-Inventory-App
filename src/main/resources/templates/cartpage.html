@@ -82,6 +82,63 @@
 <!--                <td><a th:href="@{cart/remove/{itemId}(itemId=${item.getId()})} }" class="btn btn-danger btn-block">Remove</a></td>-->
                 <td><a th:href="@{/cart/remove/{itemId}(itemId=${item.getId()})}" class="btn btn-danger btn-block">Remove</a></td>
 
+                <td>
+                    <button th:if="${item.getCarPart() != null}"  class="btn btn-success btn-block" data-toggle="modal" data-target="#editCartPartQuantity">Edit Quantity</button>
+                    <button th:if="${item.getCar() != null}"  data-toggle="modal" data-target="#editCarQuantity" class="btn btn-success btn-block">Edit Quantity</button>
+                </td>
+
+                <!-- Edit car Modal -->
+                <div th:if="${item.getCar() != null}" class="modal fade" id="editCarQuantity" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 th:text="${item.getCar().getMake()+' '+item.getCar().getModel()+':  '+item.getQuantity()}" class="modal-title" id="editCartQuantityLabel">Checkout</h4><br>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form th:action="@{/item/edit/{itemId}(itemId=${item.getId()})}" method="post" >
+                                    <div class="form-group">
+                                        <label for="cardNumber">Quantity:</label>
+                                        <input type="number" class="form-control" id="carQuantity" name="quantity" placeholder="Enter new quantity">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Edit car part Modal -->
+                <div th:if="${item.getCarPart() != null}" class="modal fade" id="editCartPartQuantity" tabindex="-1" role="dialog" aria-labelledby="checkoutModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 th:text="${item.getCarPart().getName()+':  '+item.getQuantity()}" class="modal-title" id="editCartQuantityLabel">Checkout</h4><br>
+
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                <form th:action="@{/item/edit/{itemId}(itemId=${item.getId()})}" method="post" >
+                                    <div class="form-group">
+                                        <label for="cardNumber">Quantity:</label>
+                                        <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Enter card number">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </tr>
 
             </tbody>
@@ -103,6 +160,7 @@
             </div>
         </div>
     </div>
+
 
 
     <!-- Checkout Modal -->

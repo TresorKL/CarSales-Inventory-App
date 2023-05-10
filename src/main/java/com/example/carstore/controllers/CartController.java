@@ -130,14 +130,61 @@ public class CartController {
 
         List<CartItem>items= cart.getItems();
 
-        items.removeIf(item -> item.getId() == itemId);
+        //items.removeIf(item -> item.getId() == itemId);
 
-        cart.setItems(items);
-        cart.setTotAmount(cart.determineTotAmount());
-        cartRepo.save(cart);
+        //cart.setItems(items);
+
+
 
         CartItem item = cartItemRepo.findById(itemId).get();
+        cart.getItems().remove(item);
+        cart.setTotAmount(cart.determineTotAmount());
+        cartRepo.save(cart);
         cartItemRepo.delete(item);
+        //cartRepo.save(cart);
+
+        return "redirect:/cart";
+    }
+//    Cart currentCart = (Cart) session.getAttribute("cart");
+//    Cart cart = cartRepo.findById(currentCart.getId()).get();
+//
+//    List<CartItem> items = cart.getItems();
+//    items.removeIf(item -> item.getId() == itemId);
+//
+//    // update cart's items and total amount
+//    cart.setItems(items);
+//    cart.setTotAmount(cart.determineTotAmount());
+//    cartRepo.save(cart);
+//
+//    // remove item from cart
+//    CartItem item = cartItemRepo.findById(itemId).get();
+//    cart.getItems().remove(item);
+//
+//    // delete item from repository
+//    cartItemRepo.delete(item);
+
+    @PostMapping("item/edit/{itemId}")
+    public String editItem(HttpSession session,@PathVariable Long itemId, HttpServletRequest request){
+
+        int quantity= Integer.parseInt(request.getParameter("quantity"));
+        CartItem item = cartItemRepo.findById(itemId).get();
+
+        item.setQuantity(quantity);
+        item.setAmount(item.determineAmount());
+
+        cartItemRepo.save(item);
+
+        Cart cart= (Cart)session.getAttribute("cart");
+        Long cartId= cart.getId();
+
+        Cart currentCart= cartRepo.findById(cartId).get();
+
+        currentCart.setTotAmount(currentCart.determineTotAmount());
+
+        cartRepo.save(currentCart);
+
+
+
 
         return "redirect:/cart";
     }

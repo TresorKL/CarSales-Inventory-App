@@ -24,7 +24,7 @@
                         <a class="nav-link" href="/carparts">Car Part</a>
                     </li>
                     <li th:if="${session.customer != null}" class="nav-item">
-                        <a class="nav-link" href="#">Cart</a>
+                        <a class="nav-link" href="/cart">Cart</a>
                     </li>
                     <li th:if="${session.customer == null}" class="nav-item">
                         <a class="nav-link" href="/newcustomer">Creat Account</a>
@@ -182,11 +182,11 @@
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form th:action="@{/item/car/{id}(id=${session.product.getId()})}" method="POST">
+                      <form  action="/booktestdrive" method="POST">
 
                           <div class="mb-3">
                               <label for="testDriveDate" class="form-label">Test Drive Date</label>
-                              <input type="date" class="form-control" id="testDriveDate">
+                              <input type="date" class="form-control" id="testDriveDate" name="testDriveDate" required>
                           </div>
                           <button type="submit" class="btn btn-primary">Book Test Drive</button>
                       </form>
