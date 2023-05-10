@@ -29,8 +29,8 @@ public class TestDriveBookingController {
         testDriveBookingServiceInterface.createTestDriveBooking(session,testDate);
 
 
-        Car car=(Car)session.getAttribute("product");
-        return "redirect:/product/car/" + car.getId();
+
+        return "successful-booking";
 
     }
 }

@@ -15,7 +15,6 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
     @OneToOne
     private Customer customer;
     @OneToOne
