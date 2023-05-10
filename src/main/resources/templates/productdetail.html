@@ -199,28 +199,40 @@
           </div>
       </div>
 
+
       <div class="modal fade" id="addToCartModal2" tabindex="-1" role="dialog" aria-labelledby="addToCartModal2Label" aria-hidden="true">
           <div class="modal-dialog" role="document">
               <div class="modal-content">
                   <div class="modal-header">
-                      <h5 class="modal-title" id="addToCartModal2Label">Loan Application</h5>
+                      <h5 class="modal-title" id="loanModalLabel">Loan Application Form</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                       </button>
                   </div>
                   <div class="modal-body">
-                      <form th:action="@{/item/car/{id}(id=${session.product.getId()})}" method="POST">
-
-                          <div class="mb-3">
-                              <label for="testDriveDate" class="form-label">Test Drive Date</label>
-                              <input type="date" class="form-control" id="testDriveDated">
+                      <form method="POST" action="/apply-loan">
+                          <div class="form-group">
+                              <label for="loanAmount">Loan Amount:</label>
+                              <input type="number" class="form-control" id="loanAmount" name="loanAmount" required>
                           </div>
-                          <button type="submit" class="btn btn-primary">Book Test Drive</button>
+                          <div class="form-group">
+                              <label for="downPayment">Down Payment:</label>
+                              <input type="number" class="form-control" id="downPayment" name="downPayment" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="interestRate">Interest Rate:</label>
+                              <input type="number" class="form-control" id="interestRate" name="interestRate" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="durationInMonths">Duration in Months:</label>
+                              <input type="number" class="form-control" id="durationInMonths" name="durationInMonths" required>
+                          </div>
+                          <div class="form-group">
+                              <label for="monthlyPayment">Monthly Payment:</label>
+                              <input type="number" class="form-control" id="monthlyPayment" name="monthlyPayment" required>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Submit</button>
                       </form>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <!--                    <button type="button" class="btn btn-primary">Add to Cart</button>-->
                   </div>
               </div>
           </div>
