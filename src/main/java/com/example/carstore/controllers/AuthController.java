@@ -3,6 +3,7 @@ package com.example.carstore.controllers;
 import com.example.carstore.entities.Admin;
 import com.example.carstore.entities.Customer;
 import com.example.carstore.services.AuthServiceInterface;
+import com.example.carstore.services.CarServiceInterface;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +16,15 @@ public class AuthController {
 
     @Autowired
     AuthServiceInterface authServiceInterface;
-
+    @Autowired
+    CarServiceInterface carServiceInterface;
 
     @GetMapping("/admin")
     public String getAdminPage(HttpSession session){
 
         Admin admin = (Admin) session.getAttribute("admin");
         if (admin!=null){
+            session.setAttribute("cars", carServiceInterface.getCars());
             return "adminpage";
         }else {
             return "redirect:/";
